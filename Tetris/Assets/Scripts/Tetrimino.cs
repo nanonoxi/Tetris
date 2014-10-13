@@ -5,21 +5,13 @@ using System.Collections.Generic;
 public class Tetrimino : MonoBehaviour {
 
 	public enum TYPE {I, J, L, O, S, T, Z};
-
-	public Sprite spriteI;
-	public Sprite spriteJ;
-	public Sprite spriteL;
-	public Sprite spriteO;
-	public Sprite spriteS;
-	public Sprite spriteT;
-	public Sprite spriteZ;
-	// sprite: find asset "tetrimino"+TYPE.X as a string
-
+	
 	public bool isMoving = false;
 
 	private List<TetriminoBlock> blocks;
 	private int[,] coordinates;
 	private TYPE type;
+	private Sprite sprite;
 
 	private int frames;
 	private int speed = 60; // 60 frames per second
@@ -101,10 +93,20 @@ public class Tetrimino : MonoBehaviour {
 		return false;
 	}
 
+	public void SetSprite (Sprite s) {
+		sprite = s;
+	}
+
 	public void CreateTetrimino (TYPE t, int x, int y) {
 		blocks = new List<TetriminoBlock>(4);
 		type = t;
+		//sprite = GameObject.Find("Tetrimino_" + type.GetType());
 
+		CreateCoordinates(x, y);
+		CreateBlocks();
+	}
+
+	void CreateCoordinates(int x, int y) {
 		switch (type) {
 		case TYPE.I:
 			coordinates = new int[,] {
@@ -113,7 +115,6 @@ public class Tetrimino : MonoBehaviour {
 				{y, x+1},
 				{y, x+2}
 			};
-			CreateBlocks(TYPE.I, spriteI);
 			break;
 		case TYPE.J:
 			coordinates = new int[,] {
@@ -122,7 +123,6 @@ public class Tetrimino : MonoBehaviour {
 				{y+1, x+1},
 				{y+2, x+1}
 			};
-			CreateBlocks(TYPE.J, spriteJ);
 			break;
 		case TYPE.L:
 			coordinates = new int[,] {
@@ -131,7 +131,6 @@ public class Tetrimino : MonoBehaviour {
 				{y, x},
 				{y, x+1}
 			};
-			CreateBlocks(TYPE.L, spriteL);
 			break;
 		case TYPE.O:
 			coordinates = new int[,] {
@@ -140,7 +139,6 @@ public class Tetrimino : MonoBehaviour {
 				{y, x+1},
 				{y+1, x+1}
 			};
-			CreateBlocks(TYPE.O, spriteO);
 			break;
 		case TYPE.S:
 			coordinates = new int[,] {
@@ -149,8 +147,6 @@ public class Tetrimino : MonoBehaviour {
 				{y+1, x+1},
 				{y, x+1}
 			};
-
-			CreateBlocks(TYPE.S, spriteS);
 			break;
 		case TYPE.T:
 			coordinates = new int[,] {
@@ -159,9 +155,6 @@ public class Tetrimino : MonoBehaviour {
 				{y+2, x},
 				{y+1, x+1}
 			};
-			Debug.Log ("sprite is " + spriteT);
-
-			CreateBlocks(TYPE.T, spriteT);
 			break;
 		case TYPE.Z:
 			coordinates = new int[,] {
@@ -170,15 +163,16 @@ public class Tetrimino : MonoBehaviour {
 				{y+1, x+1},
 				{y+2, x+1}
 			};
-			CreateBlocks(TYPE.Z, spriteZ);
 			break;
 		default:
 			Debug.Log("Error: tetrimino type not found.");
 			break;
 		}
+		
+
 	}
 
-	void CreateBlocks(TYPE type, Sprite sprite) {
+	void CreateBlocks() {
 		for (int i = 0; i < 4; i++) {
 			TetriminoBlock block = new TetriminoBlock();
 			Debug.Log ("sprite is " + sprite);
