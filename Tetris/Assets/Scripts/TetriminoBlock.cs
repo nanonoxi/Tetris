@@ -9,9 +9,11 @@ public class TetriminoBlock : MonoBehaviour {
 	private float textureSize = 0.6f;
 	private Vector2 translateVector = new Vector2 (-2f, -3.5f);
 
+	private SpriteRenderer renderer;
+
 	public void Create(Sprite sprite, int coordinateX, int coordinateY) {
 		blockGO = new GameObject();
-		SpriteRenderer renderer = blockGO.AddComponent<SpriteRenderer>();
+		renderer = blockGO.AddComponent<SpriteRenderer>();
 		renderer.sprite = sprite;
 
 		coordinates = new Vector2 (coordinateX, coordinateY);
