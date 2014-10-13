@@ -16,11 +16,12 @@ public class Spawner : MonoBehaviour {
 	/**
 	 * Spawn random tetrimino
 	 */
-	public Tetrimino Spawn () {
+	public Tetrimino Spawn (Sprite sprite) {
 		Debug.Log ("Spawning");
 		Tetrimino.TYPE randomType = (Tetrimino.TYPE) Random.Range(0,7);
 
 		Tetrimino tetrimino = new Tetrimino();
+		tetrimino.SetSprite(sprite);
 		tetrimino.CreateTetrimino(randomType, 3, 10);
 
 		return tetrimino;

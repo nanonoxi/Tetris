@@ -64,8 +64,8 @@ public class GridController : MonoBehaviour {
 	
 	}
 
-	public void SpawnNewTetrimino () {
-		activeTetrimino = spawner.Spawn();
+	public void SpawnNewTetrimino (Sprite sprite) {
+		activeTetrimino = spawner.Spawn(sprite);
 		//this.SetDebugText();
 	}
 
