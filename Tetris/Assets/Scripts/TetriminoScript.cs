@@ -60,10 +60,6 @@ public class TetriminoScript : MonoBehaviour {
 		CreateBlocks();
 	}
 
-	public void SetSprite (Sprite s) {
-		sprite = s;
-	}
-
 	void CreateLayout() {
 		switch (type) {
 		case TYPE.I: // 4x4 grid size
