@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class GridController : MonoBehaviour {
+public class GridControllerScript : MonoBehaviour {
 	/*
 	 * Game states
 	 * ===========
@@ -25,12 +25,11 @@ public class GridController : MonoBehaviour {
 	 */
 	private int Y_spawn = 3;
 
-	private static GridController instance;
+	private GameObject [,] grid;
+	private List<GameObject> allTetriminos;
+	private GameObject activeTetrimino;
 
-	private Spawner spawner = new Spawner();
-	private TetriminoBlock [,] grid;
-	private List<Tetrimino> allTetriminos;
-	private Tetrimino activeTetrimino;
+	public GameObject spawner;
 
 	/**
 	 * For debugging
@@ -41,31 +40,22 @@ public class GridController : MonoBehaviour {
 		guiText = text;
 	}
 
-	public static GridController GetInstance() {
-		if (instance == null) {
-			instance = new GridController();
-			instance.Start();
-		}
-		return instance;
-	}
-
 	void Start () {
 		Reset ();
 	}
 
 	void Reset () {
-		grid = new TetriminoBlock[Y+Y_spawn, X];
-		allTetriminos = new List<Tetrimino>();
+		grid = new GameObject[Y+Y_spawn, X];
+		allTetriminos = new List<GameObject>();
 		//guiText = new GUIText();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
 	}
 
-	public void SpawnNewTetrimino (Sprite sprite) {
-		activeTetrimino = spawner.Spawn(sprite);
+	public void SpawnNewTetrimino () {
+		activeTetrimino = spawner.GetComponent<SpawnerScript>().Spawn();
 		//this.SetDebugText();
 	}
 
@@ -89,7 +79,10 @@ public class GridController : MonoBehaviour {
 		guiText.text = text;
 	}
 
-	public void AddBlock (int x, int y, TetriminoBlock block) {
+	/**
+	 * Add a single tetrimino block
+	 */
+	public void AddBlock (int x, int y, GameObject block) {
 		if (grid[y, x] == null) {
 			grid[y, x] = block;
 		}
@@ -97,7 +90,7 @@ public class GridController : MonoBehaviour {
 
 	public void RemoveBlock (int x, int y) {
 		if (grid[y, x] != null) {
-			grid[y, x].SetActive(false);
+			//grid[y, x].SetActive(false);
 			grid[y, x] = null;
 		}
 	}
@@ -143,6 +136,6 @@ public class GridController : MonoBehaviour {
 	 */
 	void Settle () {
 		// update grid
-		activeTetrimino.isMoving = false;
+		//activeTetrimino.isMoving = false;
 	}
 }
