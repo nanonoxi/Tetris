@@ -18,10 +18,6 @@ public class SpawnerScript : MonoBehaviour {
 	
 	}
 
-	public void SetSpawnTetrimino (GameObject tetrimino) {
-		spawnTetrimino = tetrimino;
-	}
-
 	/**
 	 * Spawn random tetrimino
 	 */
