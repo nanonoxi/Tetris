@@ -14,7 +14,7 @@ public class TetriminoScript : MonoBehaviour {
 	private TYPE type;
 
 	private Sprite sprite;
-	private float textureSize = 0.6f;
+	private float scale = 0.6f;
 	private Vector2 translateVector = new Vector2 (-2f, -3.5f);
 
 	private int frames;
@@ -125,8 +125,8 @@ public class TetriminoScript : MonoBehaviour {
 					block.AddComponent<SpriteRenderer>().sprite = sprite;
 					
 					Vector2 position = new Vector2 (coordinates.x + j, coordinates.y + i);
-					block.transform.position = translateVector + position*textureSize;
-					block.transform.localScale = new Vector3(0.6f, 0.6f, 0);
+					block.transform.position = translateVector + position*scale;
+					block.transform.localScale = new Vector3(scale, scale, 0);
 					
 					blocks.Add(block);
 				}
@@ -199,7 +199,7 @@ public class TetriminoScript : MonoBehaviour {
 	 */
 	void Translate(Vector3 translation, List<GameObject> blocks) {
 		foreach (GameObject block in blocks) {
-			block.transform.Translate(translation*textureSize);
+			block.transform.Translate(translation*scale);
 		}
 	}
 }
