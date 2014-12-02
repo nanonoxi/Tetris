@@ -59,7 +59,7 @@ public class TetriminoScript : MonoBehaviour {
 		CreateLayout();
 		CreateBlocks();
 	}
-
+	
 	void CreateLayout() {
 		switch (type) {
 		case TYPE.I: // 4x4 grid size
@@ -118,13 +118,13 @@ public class TetriminoScript : MonoBehaviour {
 	}
 
 	void CreateBlocks() {
-		for (int i = layout.GetLength(0)-1; i > -1; i--) {
+		for (int i = 0; i < layout.GetLength(0); i++) {
 			for (int j = 0; j < layout.GetLength(1); j++) {
 				if (layout[i,j] == 1) {
 					GameObject block = new GameObject();
 					block.AddComponent<SpriteRenderer>().sprite = sprite;
 					
-					Vector2 position = new Vector2 (coordinates.x + j, coordinates.y + i);
+					Vector2 position = new Vector2 (coordinates.x + j, coordinates.y - i);
 					block.transform.position = translateVector + position*scale;
 					block.transform.localScale = new Vector3(scale, scale, 0);
 					
