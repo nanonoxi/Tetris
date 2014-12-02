@@ -59,7 +59,10 @@ public class TetriminoScript : MonoBehaviour {
 		CreateLayout();
 		CreateBlocks();
 	}
-	
+
+	/**
+	 * Layouts are inverted so that coordinates match the Cartesian plane
+	 */
 	void CreateLayout() {
 		switch (type) {
 		case TYPE.I: // 4x4 grid size
@@ -172,25 +175,14 @@ public class TetriminoScript : MonoBehaviour {
 	 * Returns false if clockwise movement not possible
 	 */
 	bool RotateClockwise () {
-		switch (type) {
-		case TYPE.O:
-			// doesn't rotate
-			break;
-		case TYPE.I:
-			// 4x4 grid of blocks
-			break;
-		case TYPE.J:
-		case TYPE.L:
-		case TYPE.S:
-		case TYPE.T:
-		case TYPE.Z:
-			// 3x3 grid of blocks
-
-			break;
-		default:
-			Debug.Log("Error: tetrimino type not found.");
-			break;
+		int [,] temp = new int[layout.GetLength(0),layout.GetLength(1)];
+		float c = layout.GetLength(0) / 2;
+		for (int i = 0; i < layout.GetLength(0); i++) {
+			for (int j = 0; j < layout.GetLength(1); j++) {
+				temp[i,j] = layout[j, (int) (2*c - i)];
+			}
 		}
+		layout = temp;
 		return false;
 	}
 	
