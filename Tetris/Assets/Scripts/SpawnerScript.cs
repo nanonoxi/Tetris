@@ -25,8 +25,8 @@ public class SpawnerScript : MonoBehaviour {
 		Debug.Log ("Spawning");
 		// clone tetrimino
 
-		TetriminoScript.TYPE randomType = (TetriminoScript.TYPE) Random.Range(0,7);
-		Vector2 spawnPosition = new Vector2(3, 10);
+		TetriminoScript.TYPE randomType = TetriminoScript.TYPE.T; //(TetriminoScript.TYPE) Random.Range(0,7);
+		Vector2 spawnPosition = new Vector2(2, 12);
 		GameObject cloneTetrimino = (GameObject) Instantiate(spawnTetrimino);
 		cloneTetrimino.GetComponent<TetriminoScript>().CreateTetrimino(randomType, spawnPosition, sprites[(int) randomType]);
 
